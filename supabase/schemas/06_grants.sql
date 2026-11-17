@@ -171,3 +171,6 @@ grant execute on function public.current_sales_id() to authenticated, service_ro
 revoke all on function public.can_see_all() from public, anon;
 grant execute on function public.can_see_all() to authenticated, service_role;
 revoke all on function public.sync_sales_role() from public, anon, authenticated;
+
+revoke all on function public.find_contacts_by_phone(text) from public, anon, authenticated;
+grant execute on function public.find_contacts_by_phone(text) to service_role;
