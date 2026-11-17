@@ -8,60 +8,60 @@ import lightModeLogo from "./logos/logo_atomic_crm_light.svg";
 export const defaultDarkModeLogo = darkModeLogo;
 export const defaultLightModeLogo = lightModeLogo;
 
-export const defaultCurrency = "USD";
+export const defaultCurrency = "PEN";
 
-export const defaultTitle = "Atomic CRM";
+export const defaultTitle = "InDrop CRM";
 
 export const defaultCompanySectors = [
-  { value: "communication-services", label: "Communication Services" },
-  { value: "consumer-discretionary", label: "Consumer Discretionary" },
-  { value: "consumer-staples", label: "Consumer Staples" },
-  { value: "energy", label: "Energy" },
-  { value: "financials", label: "Financials" },
-  { value: "health-care", label: "Health Care" },
-  { value: "industrials", label: "Industrials" },
-  { value: "information-technology", label: "Information Technology" },
-  { value: "materials", label: "Materials" },
-  { value: "real-estate", label: "Real Estate" },
-  { value: "utilities", label: "Utilities" },
+  { value: "retail", label: "Retail / tienda" },
+  { value: "ecommerce", label: "E-commerce" },
+  { value: "mayorista", label: "Mayorista / distribuidor" },
+  { value: "servicios", label: "Servicios" },
+  { value: "manufactura", label: "Manufactura" },
+  { value: "salud-belleza", label: "Salud y belleza" },
+  { value: "tecnologia", label: "Tecnología" },
+  { value: "otro", label: "Otro" },
 ];
 
+// The "opportunity", "won", "lost" and "delayed" values are used by the
+// dashboard and the Kanban board: keep them, only the labels change.
 export const defaultDealStages = [
-  { value: "opportunity", label: "Opportunity" },
-  { value: "proposal-sent", label: "Proposal Sent" },
-  { value: "in-negociation", label: "In Negotiation" },
-  { value: "won", label: "Won" },
-  { value: "lost", label: "Lost" },
-  { value: "delayed", label: "Delayed" },
+  { value: "opportunity", label: "Nuevo lead" },
+  { value: "interesado", label: "Interesado" },
+  { value: "pedido-confirmado", label: "Pedido confirmado" },
+  { value: "enviado", label: "Enviado" },
+  { value: "won", label: "Entregado y pagado" },
+  { value: "lost", label: "Perdido" },
+  { value: "delayed", label: "Reprogramado" },
 ];
 
 export const defaultDealPipelineStatuses = ["won"];
 
 export const defaultDealCategories = [
-  { value: "other", label: "Other" },
-  { value: "copywriting", label: "Copywriting" },
-  { value: "print-project", label: "Print project" },
-  { value: "ui-design", label: "UI Design" },
-  { value: "website-design", label: "Website design" },
+  { value: "producto", label: "Producto" },
+  { value: "combo", label: "Combo / pack" },
+  { value: "mayorista", label: "Venta mayorista" },
+  { value: "recompra", label: "Recompra" },
+  { value: "other", label: "Otro" },
 ];
 
 export const defaultNoteStatuses = [
-  { value: "cold", label: "Cold", color: "#7dbde8" },
-  { value: "warm", label: "Warm", color: "#e8cb7d" },
-  { value: "hot", label: "Hot", color: "#e88b7d" },
-  { value: "in-contract", label: "In Contract", color: "#a4e87d" },
+  { value: "cold", label: "Frío", color: "#7dbde8" },
+  { value: "warm", label: "Tibio", color: "#e8cb7d" },
+  { value: "hot", label: "Caliente", color: "#e88b7d" },
+  { value: "in-contract", label: "Cliente", color: "#a4e87d" },
 ];
 
 export const defaultTaskTypes = [
-  { value: "none", label: "None" },
+  { value: "none", label: "Ninguno" },
+  { value: "whatsapp", label: "WhatsApp" },
+  { value: "call", label: "Llamada" },
+  { value: "follow-up", label: "Seguimiento" },
+  { value: "ship", label: "Envío" },
+  { value: "cobro", label: "Cobro" },
   { value: "email", label: "Email" },
-  { value: "demo", label: "Demo" },
-  { value: "lunch", label: "Lunch" },
-  { value: "meeting", label: "Meeting" },
-  { value: "follow-up", label: "Follow-up" },
-  { value: "thank-you", label: "Thank you" },
-  { value: "ship", label: "Ship" },
-  { value: "call", label: "Call" },
+  { value: "meeting", label: "Reunión" },
+  { value: "thank-you", label: "Agradecimiento" },
 ];
 
 export const defaultConfiguration: ConfigurationContextValue = {

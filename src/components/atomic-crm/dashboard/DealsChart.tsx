@@ -19,7 +19,7 @@ const threeMonthsAgo = new Date(
   new Date().setMonth(new Date().getMonth() - 6),
 ).toISOString();
 
-const DEFAULT_LOCALE = "en-US";
+const DEFAULT_LOCALE = "es-PE";
 
 export const DealsChart = memo(() => {
   const translate = useTranslate();

@@ -13,6 +13,7 @@ import { useConfigurationContext } from "../root/ConfigurationContext";
 import { AutocompleteCompanyInput } from "../companies/AutocompleteCompanyInput.tsx";
 import { AutocompleteContactInput } from "../contacts/AutocompleteContactInput.tsx";
 import { validateClosingDate } from "./dealUtils";
+import { paymentMethodChoices } from "./paymentMethods";
 
 export const DealInputs = () => {
   const isMobile = useIsMobile();
@@ -82,6 +83,12 @@ const DealMiscInputs = () => {
         helperText={false}
         validate={required()}
       />
+      <SelectInput
+        source="payment_method"
+        choices={paymentMethodChoices}
+        emptyText="—"
+        helperText={false}
+      />
       <DateInput
         validate={validateClosingDate}
         source="expected_closing_date"
@@ -92,7 +99,7 @@ const DealMiscInputs = () => {
         choices={dealStages}
         optionText="label"
         optionValue="value"
-        defaultValue="opportunity"
+        defaultValue={dealStages[0]?.value ?? "opportunity"}
         helperText={false}
         validate={required()}
       />
