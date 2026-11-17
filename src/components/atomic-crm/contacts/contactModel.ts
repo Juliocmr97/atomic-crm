@@ -1,6 +1,7 @@
 import { Mars, NonBinary, Venus } from "lucide-react";
 
 import type { Company, Contact, ContactGender } from "../types";
+import { normalizePeruFields } from "./peruDocument";
 
 export const defaultEmailJsonb = [{ email: null, type: null }];
 export const defaultPhoneJsonb = [{ number: null, type: null }];
@@ -18,15 +19,18 @@ const cleanContactArrayFields = (data: Contact) => {
 };
 
 export const cleanupContactForCreate = (data: Contact) => {
-  return cleanContactArrayFields({
-    ...data,
-    first_seen: new Date().toISOString(),
-    last_seen: new Date().toISOString(),
-    tags: [],
-  });
+  return normalizePeruFields(
+    cleanContactArrayFields({
+      ...data,
+      first_seen: new Date().toISOString(),
+      last_seen: new Date().toISOString(),
+      tags: [],
+    }),
+  );
 };
 
-export const cleanupContactForEdit = cleanContactArrayFields;
+export const cleanupContactForEdit = (data: Contact) =>
+  normalizePeruFields(cleanContactArrayFields(data));
 
 type TranslateFn = (key: string, options?: { [key: string]: any }) => string;
 

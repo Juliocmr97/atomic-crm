@@ -6,6 +6,8 @@ import { raSupabaseEnglishMessages } from "ra-supabase-language-english";
 import { raSupabaseFrenchMessages } from "ra-supabase-language-french";
 import { englishCrmMessages } from "./englishCrmMessages";
 import { frenchCrmMessages } from "./frenchCrmMessages";
+import { spanishCrmMessages } from "./spanishCrmMessages";
+import { spanishRaMessages } from "./spanishRaMessages";
 
 const raSupabaseEnglishMessagesOverride = {
   "ra-supabase": {
@@ -57,17 +59,27 @@ const frenchCatalog = mergeTranslations(
   frenchCrmMessages,
 );
 
-export const getInitialLocale = (): "en" | "fr" => {
+const spanishCatalog = mergeTranslations(
+  englishCatalog,
+  spanishRaMessages,
+  spanishCrmMessages,
+);
+
+// InDrop: Spanish is the default; English or French only when the browser asks for them.
+export const getInitialLocale = (): "es" | "en" | "fr" => {
   if (typeof navigator === "undefined") {
-    return "en";
+    return "es";
   }
 
   const browserLocale = navigator.languages?.[0] ?? navigator.language;
   if (browserLocale?.toLowerCase().startsWith("fr")) {
     return "fr";
   }
+  if (browserLocale?.toLowerCase().startsWith("en")) {
+    return "en";
+  }
 
-  return "en";
+  return "es";
 };
 
 export const i18nProvider = polyglotI18nProvider(
@@ -75,10 +87,14 @@ export const i18nProvider = polyglotI18nProvider(
     if (locale === "fr") {
       return frenchCatalog;
     }
-    return englishCatalog;
+    if (locale === "en") {
+      return englishCatalog;
+    }
+    return spanishCatalog;
   },
   getInitialLocale(),
   [
+    { locale: "es", name: "Español" },
     { locale: "en", name: "English" },
     { locale: "fr", name: "Français" },
   ],

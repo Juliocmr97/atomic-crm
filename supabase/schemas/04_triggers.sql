@@ -83,3 +83,7 @@ create or replace trigger on_auth_user_created
 create or replace trigger on_auth_user_updated
     after update on auth.users
     for each row execute function public.handle_update_user();
+
+create or replace trigger sync_sales_role
+    before insert or update on public.sales
+    for each row execute function public.sync_sales_role();

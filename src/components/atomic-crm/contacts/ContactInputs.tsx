@@ -19,6 +19,8 @@ import { ArrayInput } from "@/components/admin/array-input";
 import { SimpleFormIterator } from "@/components/admin/simple-form-iterator";
 
 import { isLinkedinUrl } from "../misc/isLinkedInUrl";
+import { documentTypeChoices, validateDocumentNumber } from "./peruDocument";
+import { UbigeoInput } from "./ubigeo/UbigeoInput";
 import { StatusSelector } from "../notes";
 import type { Sale, Contact } from "../types";
 import { Avatar } from "./Avatar";
@@ -47,6 +49,7 @@ export const ContactInputs = () => {
         )}
         <div className="flex flex-col gap-10 flex-1">
           <ContactPersonalInformationInputs />
+          <ContactPeruInputs />
           <ContactMiscInputs />
         </div>
       </div>
@@ -276,6 +279,35 @@ export const ContactStatusSelector = () => {
         setStatus={handleStatusChange}
         triggerClassName="w-full"
       />
+    </div>
+  );
+};
+
+const ContactPeruInputs = () => {
+  const translate = useTranslate();
+  return (
+    <div className="flex flex-col gap-4">
+      <h6 className="text-lg font-semibold">
+        {translate("resources.contacts.field_categories.document_address")}
+      </h6>
+      <div className="flex gap-2">
+        <SelectInput
+          source="document_type"
+          choices={documentTypeChoices}
+          helperText={false}
+          emptyText="—"
+          className="w-36 min-w-36"
+        />
+        <TextInput
+          source="document_number"
+          helperText={false}
+          className="w-full"
+          validate={validateDocumentNumber}
+        />
+      </div>
+      <TextInput source="address" helperText={false} />
+      <TextInput source="address_reference" helperText={false} />
+      <UbigeoInput />
     </div>
   );
 };

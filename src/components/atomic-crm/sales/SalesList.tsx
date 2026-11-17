@@ -6,6 +6,9 @@ import { List } from "@/components/admin/list";
 import { SearchInput } from "@/components/admin/search-input";
 import { Badge } from "@/components/ui/badge";
 
+import { getSaleRole } from "../providers/commons/canAccess";
+import type { Sale } from "../types";
+
 import { TopToolbar } from "../layout/TopToolbar";
 
 const SalesListActions = () => (
@@ -18,19 +21,21 @@ const SalesListActions = () => (
 const filters = [<SearchInput source="q" alwaysOn />];
 
 const OptionsField = (_props: { label?: string | boolean }) => {
-  const record = useRecordContext();
+  const record = useRecordContext<Sale>();
   const translate = useTranslate();
   if (!record) return null;
   return (
     <div className="flex flex-row gap-1">
-      {record.administrator && (
-        <Badge
-          variant="outline"
-          className="border-blue-300 dark:border-blue-700"
-        >
-          {translate("resources.sales.fields.administrator")}
-        </Badge>
-      )}
+      <Badge
+        variant="outline"
+        className={
+          getSaleRole(record) === "asesor"
+            ? undefined
+            : "border-blue-300 dark:border-blue-700"
+        }
+      >
+        {translate(`resources.sales.roles.${getSaleRole(record)}`)}
+      </Badge>
       {record.disabled && (
         <Badge
           variant="outline"

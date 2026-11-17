@@ -64,7 +64,26 @@ export const englishCrmMessages = {
     contacts: {
       name: "Contact |||| Contacts",
       forcedCaseName: "Contact",
+      document_types: {
+        PASAPORTE: "Passport",
+      },
+      ubigeo: {
+        select: "Select a province first",
+        departamento: "Region",
+        provincia: "Province",
+        distrito: "District",
+      },
+      validation: {
+        document_required: "Enter the document number",
+        document_type_required: "Select the document type",
+        document_invalid_DNI: "A DNI has exactly 8 digits",
+        document_invalid_RUC:
+          "A RUC has 11 digits and starts with 10, 15, 17 or 20",
+        document_invalid_CE: "A CE has 8 to 12 letters or digits",
+        document_invalid_PASAPORTE: "A passport has 6 to 12 letters or digits",
+      },
       field_categories: {
+        document_address: "Document & address",
         background_info: "Background info",
         identity: "Identity",
         misc: "Misc",
@@ -72,6 +91,11 @@ export const englishCrmMessages = {
         position: "Position",
       },
       fields: {
+        document_type: "Document type",
+        document_number: "Document number",
+        address: "Address",
+        address_reference: "Reference",
+        ubigeo: "Region / Province / District",
         first_name: "First name",
         last_name: "Last name",
         last_seen: "Last seen",
@@ -185,7 +209,15 @@ export const englishCrmMessages = {
     },
     deals: {
       name: "Deal |||| Deals",
+      payment_methods: {
+        contra_entrega: "Cash on delivery",
+        transferencia: "Bank transfer",
+        yape_plin: "Yape / Plin",
+        tarjeta: "Card",
+        efectivo: "Cash",
+      },
       fields: {
+        payment_method: "Payment method",
         name: "Name",
         description: "Description",
         company_id: "Company",
@@ -292,7 +324,13 @@ export const englishCrmMessages = {
         secondary_email: "Secondary email",
         secondary_emails: "Secondary emails",
         administrator: "Admin",
+        role: "Role",
         disabled: "Disabled",
+      },
+      roles: {
+        admin: "Admin",
+        supervisor: "Supervisor",
+        asesor: "Sales advisor",
       },
       create: {
         error: "An error occurred while creating the user.",

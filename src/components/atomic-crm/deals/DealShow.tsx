@@ -116,7 +116,7 @@ const DealShowContent = () => {
                 {translate("resources.deals.fields.amount")}
               </span>
               <span className="text-sm">
-                {record.amount.toLocaleString("en-US", {
+                {record.amount.toLocaleString("es-PE", {
                   notation: "compact",
                   style: "currency",
                   currency,
@@ -125,6 +125,19 @@ const DealShowContent = () => {
                 })}
               </span>
             </div>
+
+            {record.payment_method && (
+              <div className="flex flex-col mr-10">
+                <span className="text-xs text-muted-foreground tracking-wide">
+                  {translate("resources.deals.fields.payment_method")}
+                </span>
+                <span className="text-sm">
+                  {translate(
+                    `resources.deals.payment_methods.${record.payment_method}`,
+                  )}
+                </span>
+              </div>
+            )}
 
             {!!record.categories?.length && (
               <div className="flex flex-col mr-10">

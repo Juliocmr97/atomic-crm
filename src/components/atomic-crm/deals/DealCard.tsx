@@ -1,5 +1,5 @@
 import { Draggable } from "@hello-pangea/dnd";
-import { useRedirect, RecordContextProvider } from "ra-core";
+import { useRedirect, RecordContextProvider, useTranslate } from "ra-core";
 import { ReferenceField } from "@/components/admin/reference-field";
 import { NumberField } from "@/components/admin/number-field";
 import { Card, CardContent } from "@/components/ui/card";
@@ -31,6 +31,7 @@ export const DealCardContent = ({
   deal: Deal;
 }) => {
   const { dealCategories, currency } = useConfigurationContext();
+  const translate = useTranslate();
   const redirect = useRedirect();
   const handleClick = () => {
     redirect(`/deals/${deal.id}/show`, undefined, undefined, undefined, {
@@ -87,6 +88,11 @@ export const DealCardContent = ({
               {deal.categories?.length ? ", " : ""}
               {formatDealCategories(dealCategories, deal.categories)}
             </p>
+            {deal.payment_method === "contra_entrega" && (
+              <span className="mt-1 inline-block rounded border border-amber-300 px-1.5 text-[10px] text-amber-700 dark:border-amber-700 dark:text-amber-300">
+                {translate("resources.deals.payment_methods.contra_entrega")}
+              </span>
+            )}
           </CardContent>
         </Card>
       </RecordContextProvider>

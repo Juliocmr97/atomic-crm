@@ -67,7 +67,27 @@ export const frenchCrmMessages = {
     contacts: {
       name: "Contact |||| Contacts",
       forcedCaseName: "Contact",
+      document_types: {
+        PASAPORTE: "Passeport",
+      },
+      ubigeo: {
+        select: "Choisissez d'abord une province",
+        departamento: "Région",
+        provincia: "Province",
+        distrito: "District",
+      },
+      validation: {
+        document_required: "Saisissez le numéro du document",
+        document_type_required: "Choisissez le type de document",
+        document_invalid_DNI: "Un DNI comporte exactement 8 chiffres",
+        document_invalid_RUC:
+          "Un RUC comporte 11 chiffres et commence par 10, 15, 17 ou 20",
+        document_invalid_CE: "Une CE comporte 8 à 12 lettres ou chiffres",
+        document_invalid_PASAPORTE:
+          "Un passeport comporte 6 à 12 lettres ou chiffres",
+      },
       field_categories: {
+        document_address: "Document et adresse",
         background_info: "Informations complémentaires",
         identity: "Identité",
         misc: "Divers",
@@ -75,6 +95,11 @@ export const frenchCrmMessages = {
         position: "Poste",
       },
       fields: {
+        document_type: "Type de document",
+        document_number: "Numéro de document",
+        address: "Adresse",
+        address_reference: "Référence",
+        ubigeo: "Région / Province / District",
         first_name: "Prénom",
         last_name: "Nom",
         last_seen: "Dernière activité",
@@ -189,7 +214,15 @@ export const frenchCrmMessages = {
     },
     deals: {
       name: "Affaire |||| Affaires",
+      payment_methods: {
+        contra_entrega: "Paiement à la livraison",
+        transferencia: "Virement",
+        yape_plin: "Yape / Plin",
+        tarjeta: "Carte",
+        efectivo: "Espèces",
+      },
       fields: {
+        payment_method: "Mode de paiement",
         name: "Nom",
         description: "Description",
         company_id: "Entreprise",
@@ -296,7 +329,13 @@ export const frenchCrmMessages = {
         secondary_email: "E-mail secondaire",
         secondary_emails: "E-mails secondaires",
         administrator: "Admin",
+        role: "Rôle",
         disabled: "Désactivé",
+      },
+      roles: {
+        admin: "Administrateur",
+        supervisor: "Superviseur",
+        asesor: "Commercial",
       },
       create: {
         error:

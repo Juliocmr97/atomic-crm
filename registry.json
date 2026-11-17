@@ -184,6 +184,10 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/sales/saleRoles.ts",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/sales/index.ts",
           "type": "registry:component"
         },
@@ -333,6 +337,14 @@
         },
         {
           "path": "src/components/atomic-crm/providers/fakerest/dataGenerator/companies.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/providers/commons/spanishRaMessages.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/providers/commons/spanishCrmMessages.ts",
           "type": "registry:component"
         },
         {
@@ -600,6 +612,10 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/deals/paymentMethods.ts",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/deals/index.ts",
           "type": "registry:component"
         },
@@ -752,6 +768,10 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/contacts/peruDocument.ts",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/contacts/index.tsx",
           "type": "registry:component"
         },
@@ -841,6 +861,14 @@
         },
         {
           "path": "src/components/atomic-crm/contacts/AutocompleteContactInput.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/contacts/ubigeo/useUbigeo.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/contacts/ubigeo/UbigeoInput.tsx",
           "type": "registry:component"
         },
         {

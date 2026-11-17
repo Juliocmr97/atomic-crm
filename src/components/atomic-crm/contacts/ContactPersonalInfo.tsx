@@ -3,7 +3,7 @@ import { useRecordContext, useTranslate, WithRecord } from "ra-core";
 import { ArrayField } from "@/components/admin/array-field";
 import { SingleFieldList } from "@/components/admin/single-field-list";
 import { EmailField } from "@/components/admin/email-field";
-import { Mail, Phone, Linkedin, Check } from "lucide-react";
+import { Mail, Phone, Linkedin, Check, IdCard, MapPin } from "lucide-react";
 import type { ReactNode } from "react";
 import {
   contactGender,
@@ -11,15 +11,47 @@ import {
   translatePersonalInfoTypeLabel,
 } from "./contactModel";
 import type { Contact } from "../types";
+import { formatUbigeo, useUbigeo } from "./ubigeo/useUbigeo";
 
 export const ContactPersonalInfo = () => {
   const record = useRecordContext<Contact>();
   const translate = useTranslate();
+  const ubigeoData = useUbigeo();
 
   if (!record) return null;
 
+  const location = [record.address, formatUbigeo(ubigeoData, record.ubigeo)]
+    .filter(Boolean)
+    .join(" — ");
+
   return (
     <div>
+      {record.document_type && record.document_number && (
+        <PersonalInfoRow
+          icon={<IdCard className="w-4 h-4 text-muted-foreground" />}
+          primary={
+            <span className="text-sm">
+              {record.document_type} {record.document_number}
+            </span>
+          }
+        />
+      )}
+      {location && (
+        <PersonalInfoRow
+          icon={<MapPin className="w-4 h-4 text-muted-foreground" />}
+          primary={
+            <span className="text-sm">
+              {location}
+              {record.address_reference && (
+                <span className="block text-muted-foreground">
+                  {translate("resources.contacts.fields.address_reference")}:{" "}
+                  {record.address_reference}
+                </span>
+              )}
+            </span>
+          }
+        />
+      )}
       <ArrayField source="email_jsonb">
         <SingleFieldList className="flex-col gap-y-0">
           <EmailRow />
