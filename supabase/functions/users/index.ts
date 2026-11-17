@@ -17,13 +17,25 @@ async function updateSaleDisabled(user_id: string, disabled: boolean) {
     .eq("user_id", user_id);
 }
 
+const SALE_ROLES = ["admin", "supervisor", "asesor"] as const;
+type SaleRole = (typeof SALE_ROLES)[number];
+
+// `role` wins over the legacy `administrator` flag; a DB trigger keeps both in sync.
+function resolveRole(role: unknown, administrator: boolean): SaleRole {
+  if (typeof role === "string" && SALE_ROLES.includes(role as SaleRole)) {
+    return role as SaleRole;
+  }
+  return administrator ? "admin" : "asesor";
+}
+
 async function updateSaleAdministrator(
   user_id: string,
   administrator: boolean,
+  role?: unknown,
 ) {
   const { data: sales, error: salesError } = await supabaseAdmin
     .from("sales")
-    .update({ administrator })
+    .update({ role: resolveRole(role, administrator) })
     .eq("user_id", user_id)
     .select("*");
 
@@ -43,6 +55,7 @@ async function createSale(
     last_name: string;
     disabled: boolean;
     administrator: boolean;
+    role?: SaleRole;
   },
 ) {
   const { data: sales, error: salesError } = await supabaseAdmin
@@ -127,8 +140,15 @@ async function updateSaleAvatar(user_id: string, avatar: string) {
 }
 
 async function inviteUser(req: Request, currentUserSale: any) {
-  const { email, password, first_name, last_name, disabled, administrator } =
-    await req.json();
+  const {
+    email,
+    password,
+    first_name,
+    last_name,
+    disabled,
+    administrator,
+    role,
+  } = await req.json();
 
   if (!currentUserSale.administrator) {
     return createErrorResponse(401, "Not Authorized");
@@ -203,6 +223,7 @@ async function inviteUser(req: Request, currentUserSale: any) {
         last_name,
         disabled,
         administrator,
+        role: resolveRole(role, administrator),
       });
 
       return new Response(
@@ -244,7 +265,7 @@ async function inviteUser(req: Request, currentUserSale: any) {
 
   try {
     await updateSaleDisabled(user.id, disabled);
-    const sale = await updateSaleAdministrator(user.id, administrator);
+    const sale = await updateSaleAdministrator(user.id, administrator, role);
 
     return new Response(
       JSON.stringify({
@@ -269,6 +290,7 @@ async function patchUser(req: Request, currentUserSale: any) {
     last_name,
     avatar,
     administrator,
+    role,
     disabled,
   } = await req.json();
   const { data: sale } = await supabaseAdmin
@@ -401,7 +423,11 @@ async function patchUser(req: Request, currentUserSale: any) {
 
   try {
     await updateSaleDisabled(data.user.id, disabled);
-    const sale = await updateSaleAdministrator(data.user.id, administrator);
+    const sale = await updateSaleAdministrator(
+      data.user.id,
+      administrator,
+      role,
+    );
     return new Response(
       JSON.stringify({
         data: sale,

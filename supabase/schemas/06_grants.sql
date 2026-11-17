@@ -165,3 +165,9 @@ grant all on sequence public.tasks_id_seq to service_role;
 
 -- No default privileges: every new table, view, sequence or function must
 -- declare its grants explicitly in the migration that creates it.
+
+revoke all on function public.current_sales_id() from public, anon;
+grant execute on function public.current_sales_id() to authenticated, service_role;
+revoke all on function public.can_see_all() from public, anon;
+grant execute on function public.can_see_all() to authenticated, service_role;
+revoke all on function public.sync_sales_role() from public, anon, authenticated;

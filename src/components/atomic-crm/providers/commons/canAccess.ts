@@ -7,6 +7,14 @@ type CanAccessParams<
   record?: RecordType;
 };
 
+/**
+ * Roles:
+ * - admin: everything
+ * - supervisor: sees all records, configures pipelines and stages, can read
+ *   (but not manage) users so it can assign records to advisors
+ * - asesor (and legacy "user"): only their own records (enforced by RLS),
+ *   no access to users or configuration
+ */
 export const canAccess = <
   RecordType extends Record<string, any> = Record<string, any>,
 >(
@@ -17,15 +25,27 @@ export const canAccess = <
     return true;
   }
 
-  // Non admins can't access the sales resource
+  if (role === "supervisor") {
+    if (params.resource === "sales") {
+      return ["list", "show"].includes(params.action);
+    }
+    return true;
+  }
+
+  // Advisors can't access the sales resource
   if (params.resource === "sales") {
     return false;
   }
 
-  // Non admins can't access the configuration resource
+  // Advisors can't access the configuration resource
   if (params.resource === "configuration") {
     return false;
   }
 
   return true;
 };
+
+export const getSaleRole = (sale: {
+  role?: string | null;
+  administrator?: boolean;
+}) => sale.role ?? (sale.administrator ? "admin" : "asesor");

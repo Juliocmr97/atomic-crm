@@ -292,7 +292,13 @@ export const englishCrmMessages = {
         secondary_email: "Secondary email",
         secondary_emails: "Secondary emails",
         administrator: "Admin",
+        role: "Role",
         disabled: "Disabled",
+      },
+      roles: {
+        admin: "Admin",
+        supervisor: "Supervisor",
+        asesor: "Sales advisor",
       },
       create: {
         error: "An error occurred while creating the user.",

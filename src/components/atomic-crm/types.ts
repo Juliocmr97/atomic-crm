@@ -24,13 +24,17 @@ export type SalesFormData = {
   first_name: string;
   last_name: string;
   administrator: boolean;
+  role?: SaleRole;
   disabled: boolean;
 };
+
+export type SaleRole = "admin" | "supervisor" | "asesor";
 
 export type Sale = {
   first_name: string;
   last_name: string;
   administrator: boolean;
+  role?: SaleRole;
   avatar?: RAFile;
   disabled?: boolean;
   user_id: string;
@@ -101,6 +105,11 @@ export type Contact = {
   status: string;
   background: string;
   phone_jsonb: PhoneNumberAndType[];
+  document_type?: DocumentType | null;
+  document_number?: string | null;
+  address?: string | null;
+  address_reference?: string | null;
+  ubigeo?: string | null;
   nb_tasks?: number;
   company_name?: string;
 } & Pick<RaRecord, "id">;
@@ -122,6 +131,7 @@ export type Deal = {
   stage: string;
   description: string;
   amount: number;
+  payment_method?: PaymentMethod | null;
   created_at: string;
   updated_at: string;
   archived_at?: string;
@@ -245,3 +255,8 @@ export type SearchResult = {
   /** The searched fields, to show and highlight where the query matched. */
   content: string | null;
 };
+
+export type DocumentType = "DNI" | "RUC" | "CE" | "PASAPORTE";
+
+export type PaymentMethod =
+  "contra_entrega" | "transferencia" | "yape_plin" | "tarjeta" | "efectivo";

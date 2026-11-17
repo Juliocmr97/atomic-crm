@@ -491,3 +491,46 @@ BEGIN
   RETURN NEW;
 END;
 $$;
+
+CREATE OR REPLACE FUNCTION "public"."can_see_all"() RETURNS boolean
+    LANGUAGE "sql" STABLE SECURITY DEFINER
+    SET "search_path" TO ''
+    AS $$
+  select exists (
+    select 1 from public.sales
+    where user_id = auth.uid()
+      and disabled = false
+      and role in ('admin', 'supervisor')
+  );
+$$;
+
+CREATE OR REPLACE FUNCTION "public"."current_sales_id"() RETURNS bigint
+    LANGUAGE "sql" STABLE SECURITY DEFINER
+    SET "search_path" TO ''
+    AS $$
+  select id from public.sales where user_id = auth.uid() and disabled = false;
+$$;
+
+CREATE OR REPLACE FUNCTION "public"."sync_sales_role"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    SET "search_path" TO ''
+    AS $$
+begin
+  if tg_op = 'INSERT' then
+    if new.role is null then
+      new.role := case when new.administrator then 'admin' else 'asesor' end;
+    end if;
+  elsif new.role is distinct from old.role then
+    null; -- role wins
+  elsif new.administrator is distinct from old.administrator then
+    new.role := case
+      when new.administrator then 'admin'
+      when old.role = 'admin' then 'asesor'
+      else old.role
+    end;
+  end if;
+
+  new.administrator := (new.role = 'admin');
+  return new;
+end;
+$$;
