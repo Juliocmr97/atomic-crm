@@ -37,11 +37,11 @@ describe("searchDealCategories", () => {
   it("falls back to the default categories when none are configured", async () => {
     const result = await searchDealCategories(
       searchParams,
-      "copywriting",
+      "combo",
       dataProviderWithConfig({}),
     );
 
-    expect(result.filter["@or"]["categories@ov"]).toBe('{"copywriting"}');
+    expect(result.filter["@or"]["categories@ov"]).toBe('{"combo"}');
   });
 
   it("leaves the search unchanged when no category matches", async () => {
